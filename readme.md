@@ -1,16 +1,24 @@
-# Solarized Dark theme for Hyper
+WIP fork of Ghosh's implentations of the solarized theme
+# Solarized theme for Hyper
 
-A port of the [Solarized Dark](http://ethanschoonover.com/solarized) theme for [Hyper.app](https://hyper.is)
+A port of the [Solarized](http://ethanschoonover.com/solarized) theme for [Hyper.app](https://hyper.is)
 
-![Solarized Dark Hyper](https://www.dropbox.com/s/mkwkek1mmwupght/hyperterm-solarized-dark.png?raw=1)
+![Hyper Solarized](https://media.giphy.com/media/2zcquVWcOJ2eOlVYmE/giphy.gif)
 
-### Installation
+## Installation
+
+### Using the built in Hyper plugin manager
+```bash
+$ hyper i hyper-solarized
+```
+
+### Using the .hyper.js file
 1. Open Hyper's preferences by pressing `Cmd + ,`.
 2. Find and Update the plugins array to include `hyper-solarized-dark`:  
 
   ```js
   plugins: [  
-    'hyper-solarized-dark'  
+    'hyper-solarized'  
   ],
   ```
 
@@ -19,6 +27,7 @@ A port of the [Solarized Dark](http://ethanschoonover.com/solarized) theme for [
 
 ### Related
 - [Solarized Light Theme](https://github.com/Ghosh/hyper-solarized-light)
+- [Solarized Dark Theme](https://github.com/Ghosh/hyper-solarized-dark)
 
 ```
 License - MIT
