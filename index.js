@@ -1,11 +1,8 @@
-const darkBackgroundColor = '#002b36'
-const darkForegroundColor = '#839496'
-const lightBackgroundColor = '#fdf6e3'
-const lightForegroundColor = '#839496'
-const darkNavColor = '#001f27'
-const lightNavColor = '#e6dfcb'
-const cursorColor = 'rgba(181, 137, 0, 0.6)'
-const borderColor = 'transparent'
+'use strict';
+const darkNavColor = '#001f27';
+const lightNavColor = '#e6dfcb';
+const defaultCursorColor = 'rgba(181, 137, 0, 0.6)';
+const defaultBorderColor = 'transparent';
 
 const colors = {
   lightBlack:     '#002b36',
@@ -24,43 +21,66 @@ const colors = {
   blue:           '#268bd2',
   cyan:           '#2aa198',
   green:          '#859900'
-}
+};
 
-function getUserOptions(configObj) {
+function getDefaultConfig() {
   return Object.assign({}, {
-    get backgroundColor() {
-      if (configObj.hyper_solarized.background === 'dark')
-        return darkBackgroundColor;
-      else if (configObj.hyper_solarized.background === 'light')
-        return lightBackgroundColor;
+    get background() {
+      return 'dark';
     },
-    get foregroundColor() {
-      if (configObj.hyper_solarized.background === 'dark')
-        return darkForegroundColor;
-      else if (configObj.hyper_solarized.background === 'light')
-        return lightForegroundColor;
+    get unibody() {
+      return true;
     },
-    get tabNavBackgroundColor() {
-      if (configObj.hyper_solarized.unibody === 'false') {
-        if (configObj.hyper_solarized.background === 'dark') {
-          return darkNavColor;
-        } else if (configObj.hyper_solarized.background === 'light') {
-          return lightNavColor;
-        }
-      } else if (configObj.hyper_solarized.unibody === 'true') {
-        return this.backgroundColor;
-      }
+    get cursorColor() {
+      return defaultCursorColor;
+    },
+    get borderColor() {
+      return defaultBorderColor;
     }
   });
+}
+
+function getUserOptions(confObj) {
+  if (confObj.hyper_solarized === undefined) {
+    return getDefaultConfig();
+  }
+
+  return Object.assign({}, {
+    get background() {
+      return confObj.hyper_solarized.background || 'dark';
+    },
+    get unibody() {
+      return (confObj.hyper_solarized.unibody || 'true') !== 'false';
+    },
+    get cursorColor() {
+      return confObj.hyper_solarized.cursorColor || defaultCursorColor;
+    },
+    get borderColor() {
+      return confObj.hyper_solarized.borderColor || defaultBorderColor;
+    }
+  });
+}
+
+function getColors(options) {
+  if (options.background === 'light') {
+    if (options.unibody)
+      return [colors.lightWhite, colors.lightWhite, options.cursorColor, options.borderColor];
+    else
+      return [colors.lightWhite, lightNavColor, options.cursorColor, options.borderColor];
+  }
+  else
+  if (options.unibody)
+    return [colors.lightBlack, colors.lightBlack, options.cursorColor, options.borderColor];
+  else
+    return [colors.lightBlack, darkNavColor, options.cursorColor, options.borderColor];
 }
 
 exports.decorateConfig = config => {
 
   // Get user options
   const options = getUserOptions(config);
-  const backgroundColor = options.backgroundColor;
-  const foregroundColor = options.foregroundColor;
-  const navBackground = options.tabNavBackgroundColor;
+  const [backgroundColor, navBackgroundColor, cursorColor, borderColor] = getColors(options);
+  const foregroundColor = colors.lightBlue;
 
   return Object.assign({}, config, {
     foregroundColor,
@@ -81,11 +101,11 @@ exports.decorateConfig = config => {
         border: 0;
       }
       .tabs_nav {
-        background-color: ${navBackground};
+        background-color: ${navBackgroundColor};
       }
       .tab_tab {
         color: ${foregroundColor};
-        background-color: #001f27;
+        background-color: ${navBackgroundColor};
         border-color: ${borderColor};
       }
       .tab_tab:before {
@@ -98,8 +118,8 @@ exports.decorateConfig = config => {
         background-color: ${backgroundColor};
       }
       .splitpane_divider {
-        background-color: #001f27;
+        background-color: ${navBackgroundColor};
       }
     `
   })
-}
+};
