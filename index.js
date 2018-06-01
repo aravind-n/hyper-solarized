@@ -1,6 +1,6 @@
 'use strict';
-const darkNavColor = '#001f27';
-const lightNavColor = '#e6dfcb';
+const defaultDarkNavColor = '#001f27';
+const defaultLightNavColor = '#e6dfcb';
 const defaultCursorColor = 'rgba(181, 137, 0, 0.6)';
 const defaultBorderColor = 'transparent';
 
@@ -36,6 +36,9 @@ function getDefaultConfig() {
     },
     get borderColor() {
       return defaultBorderColor;
+    },
+    get navBackground() {
+      return defaultDarkNavColor;
     }
   });
 }
@@ -57,22 +60,35 @@ function getUserOptions(confObj) {
     },
     get borderColor() {
       return confObj.hyper_solarized.borderColor || defaultBorderColor;
+    },
+    get navBackground() {
+      if (confObj.hyper_solarized.navColor === undefined) {
+        return (confObj.hyper_solarized.background === 'dark') ? defaultDarkNavColor : defaultLightNavColor;
+      }
+      return confObj.hyper_solarized.navColor;
     }
   });
 }
 
 function getColors(options) {
+  let backgroundColor;
+  let navBackgroundColor;
+
   if (options.background === 'light') {
+    backgroundColor = colors.lightWhite;
     if (options.unibody)
-      return [colors.lightWhite, colors.lightWhite, options.cursorColor, options.borderColor];
+      navBackgroundColor = colors.lightWhite;
     else
-      return [colors.lightWhite, lightNavColor, options.cursorColor, options.borderColor];
+      navBackgroundColor = options.navBackground;
   }
-  else
-  if (options.unibody)
-    return [colors.lightBlack, colors.lightBlack, options.cursorColor, options.borderColor];
-  else
-    return [colors.lightBlack, darkNavColor, options.cursorColor, options.borderColor];
+  else {
+    backgroundColor = colors.lightBlack;
+    if (options.unibody)
+      navBackgroundColor = colors.lightBlack;
+    else
+      navBackgroundColor = options.navBackground;
+  }
+  return [backgroundColor, navBackgroundColor, options.cursorColor, options.borderColor];
 }
 
 exports.decorateConfig = config => {

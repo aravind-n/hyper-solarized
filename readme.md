@@ -38,10 +38,11 @@ The following custom configuration options are currently supported
 
 | Parameter | Function | Values |  
 |:----------|:---------|-------:|
-|Background	|The variant of Solarized to be used | `{'dark', 'light'}` Defaults to dark|
-|Unibody	|Specifies whether the terminal window should have a seamless window or a different colored background for the tab nav bar | `{'true', 'false'}` Defaults to true|
+|background	|The variant of Solarized to be used | `{'dark', 'light'}` Defaults to dark|
+|unibody	|Specifies whether the terminal window should have a seamless window or a different colored background for the tab nav bar | `{'true', 'false'}` Defaults to true|
 |cursorColor|The color of the caret in the terminal|CSS color value (Hex/rgba)|
 |borderColor|The color of the main window border and the tab bar|CSS color value. Defaults to transparent|
+|navColor|The color of the nav bar|CSS color value. Overridden by unibody|
 
 
 
