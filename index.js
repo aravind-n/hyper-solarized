@@ -73,29 +73,34 @@ function getUserOptions(confObj) {
 function getColors(options) {
   let backgroundColor;
   let navBackgroundColor;
+  let inactiveTabBackground;
 
   if (options.background === 'light') {
     backgroundColor = colors.lightWhite;
-    if (options.unibody)
+    if (options.unibody) {
       navBackgroundColor = colors.lightWhite;
+      inactiveTabBackground = defaultLightNavColor;
+    }
     else
-      navBackgroundColor = options.navBackground;
+      inactiveTabBackground = navBackgroundColor = options.navBackground;
   }
   else {
     backgroundColor = colors.lightBlack;
-    if (options.unibody)
+    if (options.unibody) {
       navBackgroundColor = colors.lightBlack;
+      inactiveTabBackground = defaultDarkNavColor;
+    }
     else
-      navBackgroundColor = options.navBackground;
+      inactiveTabBackground = navBackgroundColor = options.navBackground;
   }
-  return [backgroundColor, navBackgroundColor, options.cursorColor, options.borderColor];
+  return [backgroundColor, navBackgroundColor, inactiveTabBackground, options.cursorColor, options.borderColor];
 }
 
 exports.decorateConfig = config => {
 
   // Get user options
   const options = getUserOptions(config);
-  const [backgroundColor, navBackgroundColor, cursorColor, borderColor] = getColors(options);
+  const [backgroundColor, navBackgroundColor, inactiveTabBackground, cursorColor, borderColor] = getColors(options);
   const foregroundColor = colors.lightBlue;
 
   return Object.assign({}, config, {
@@ -120,8 +125,8 @@ exports.decorateConfig = config => {
         background-color: ${navBackgroundColor};
       }
       .tab_tab {
-        color: ${foregroundColor};
-        background-color: ${navBackgroundColor};
+        color: ${foregroundColor} !important;
+        background-color: ${inactiveTabBackground};
         border-color: ${borderColor};
       }
       .tab_tab:before {
