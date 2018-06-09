@@ -1,6 +1,6 @@
 {
   "name": "hyper-solarized",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Hyper theme using the Solarized colors",
   "main": "index.js",
   "keywords": [
@@ -16,10 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/aravind-n/hyper-solarized.git"
   },
-  "author": "Indrashish Ghosh",
-  "contributors": [
-    "Aravind Nidadavolu <aravind.nid7@gmail.com>"
-  ],
+  "author": "Aravind Nidadavolu",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/aravind-n/hyper-solarized/issues"
