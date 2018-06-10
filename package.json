@@ -1,6 +1,6 @@
 {
   "name": "hyper-solarized",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Hyper theme using the Solarized colors",
   "main": "index.js",
   "keywords": [
@@ -14,14 +14,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aravind-n/hyper-solarized.git"
+    "url": "git+ssh://git@gitlab.com:aravind-n/hyper-solarized.git"
   },
   "author": "Aravind Nidadavolu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aravind-n/hyper-solarized/issues"
+    "url": "https://gitlab.com/aravind-n/hyper-solarized/issues"
   },
-  "homepage": "https://github.com/aravind-n/hyper-solarized#readme",
+  "homepage": "https://gitlab.com/aravind-n/hyper-solarized#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
