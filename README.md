@@ -1,4 +1,3 @@
-
 Hyper-Solarized
 ========
 
