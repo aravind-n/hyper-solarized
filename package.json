@@ -1,6 +1,6 @@
 {
   "name": "hyper-solarized",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Hyper theme using the Solarized colors",
   "main": "index.js",
   "keywords": [
