@@ -1,8 +1,12 @@
+/*jshint esversion: 6 */
 'use strict';
 const defaultDarkNavColor = '#001f27';
 const defaultLightNavColor = '#e6dfcb';
 const defaultCursorColor = 'rgba(181, 137, 0, 0.6)';
 const defaultBorderColor = 'transparent';
+const defaultAuto = false;
+const defaultLightTime = '08:00';
+const defaultDarkTime = '19:00';
 
 const colors = {
   lightBlack:     '#002b36',
@@ -39,6 +43,15 @@ function getDefaultConfig() {
     },
     get navBackground() {
       return defaultDarkNavColor;
+    },
+    get auto () {
+      return defaultAuto;
+    },
+    get lightTime () {
+      return defaultLightTime;
+    },
+    get darkTime () {
+      return defaultDarkTime;
     }
   });
 }
@@ -66,8 +79,56 @@ function getUserOptions(confObj) {
         return (confObj.hyper_solarized.background === 'dark') ? defaultDarkNavColor : defaultLightNavColor;
       }
       return confObj.hyper_solarized.navColor;
+    },
+    get auto() {
+      return confObj.hyper_solarized.auto || defaultAuto;
+    },
+    get lightTime() {
+      return confObj.hyper_solarized.lightTime || defaultLightTime;
+    },
+    get darkTime() {
+      return confObj.hyper_solarized.darkTime || defaultDarkTime;
     }
   });
+}
+
+// parse a string like '18:00' to get times in total seconds
+function formatTime(str) {
+  let seconds; // one day === 86400
+  if (str) {
+    let arr = str.split(':').slice(0,2);
+    for(let i = 0; i < arr.length; i++) {
+      arr[i] = parseInt(arr[i]);
+    }
+    seconds = (arr[0] * 60 * 60) + (arr[1] * 60);
+  }
+  return seconds;
+}
+
+function pickBackground(options) {
+  if (options.auto) {
+    // get user's times, or defaults
+    const lightTime = formatTime(options.lightTime);
+    const darkTime = formatTime(options.darkTime);
+
+    // cache current time (on decorate) ((in seconds))
+    const date = new Date();
+    const now = (date.getHours() * 60 * 60) + (date.getMinutes() * 60);
+
+    // decide on light vs. dark
+    let light;
+    if(now > lightTime) {
+      light = true;
+    }
+    if(now > darkTime) {
+      light = false;
+    }
+    return light ? 'light' : 'dark';
+  }
+  else {
+    // if time logic fails, fallback to background option
+    return options.background;
+  }
 }
 
 function getColors(options) {
@@ -75,7 +136,8 @@ function getColors(options) {
   let navBackgroundColor;
   let inactiveTabBackground;
 
-  if (options.background === 'light') {
+  // decision for light vs dark
+  if (pickBackground(options) === 'light') {
     backgroundColor = colors.lightWhite;
     if (options.unibody) {
       navBackgroundColor = colors.lightWhite;
@@ -142,5 +204,5 @@ exports.decorateConfig = config => {
         background-color: ${navBackgroundColor};
       }
     `
-  })
+  });
 };
