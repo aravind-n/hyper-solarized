@@ -55,3 +55,5 @@ The following custom configuration options are currently supported
 ## Screenshots
 ![light](https://i.imgur.com/F97GT6K.png)
 ![dark](https://i.imgur.com/36DdLbA.png)
+
+Avatar made by Ethan Schoonover. All rights to the avatar go to him.
