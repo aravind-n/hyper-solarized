@@ -1,11 +1,15 @@
 Hyper-Solarized
 ========
-
+  
+[![Pipeline Status](https://gitlab.com/aravind-n/hyper-solarized/badges/master/pipeline.svg)](https://gitlab.com/aravind-n/hyper-solarized/commits/master)
+[![npm](https://img.shields.io/npm/dm/hyper-solarized.svg?label=DL)](https://www.npmjs.com/package/hyper-solarized)
+[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-3D76C2.svg)](https://github.com/aravind-n/hyper-solarized)
+[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-6C488A.svg)](https://gitlab.com/aravind-n/hyper-solarized)
+  
 Hyper-Solarized is an implementation of the [Solarized](http://ethanschoonover.com/solarized) theme for the [Hyper terminal](https://hyper.is).
 
 ![Hyper Solarized](https://i.imgur.com/JdT64Kc.gif)
-
-
+  
 # Contents
 1. [Installation](#installation) 
 2. [Configuration](#configuration)
