@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 'use strict';
 const defaultDarkNavColor = '#001f27';
 const defaultLightNavColor = '#e6dfcb';
