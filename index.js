@@ -1,4 +1,6 @@
 'use strict'
+const base03 = '#002b36'
+const base3 = '#fdf6e3'
 const defaultDarkNavColor = '#001f27'
 const defaultLightNavColor = '#e6dfcb'
 const defaultCursorColor = 'rgba(181, 137, 0, 0.6)'
@@ -8,7 +10,7 @@ const defaultLightTime = '08:00'
 const defaultDarkTime = '19:00'
 
 const colors = {
-  lightBlack: '#002b36',
+  lightBlack: '#586e75',
   black: '#073642',
   lightGreen: '#586e75',
   lightYellow: '#657b83',
@@ -136,15 +138,15 @@ function getColors (options) {
 
   // decision for light vs dark
   if (pickBackground(options) === 'light') {
-    backgroundColor = colors.lightWhite
+    backgroundColor = base3
     if (options.unibody) {
-      navBackgroundColor = colors.lightWhite
+      navBackgroundColor = base3
       inactiveTabBackground = defaultLightNavColor
     } else { inactiveTabBackground = navBackgroundColor = options.navBackground }
   } else {
-    backgroundColor = colors.lightBlack
+    backgroundColor = base03
     if (options.unibody) {
-      navBackgroundColor = colors.lightBlack
+      navBackgroundColor = base03
       inactiveTabBackground = defaultDarkNavColor
     } else { inactiveTabBackground = navBackgroundColor = options.navBackground }
   }
