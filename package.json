@@ -23,6 +23,9 @@
   },
   "homepage": "https://gitlab.com/aravind-n/hyper-solarized#readme",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
   }
 }
